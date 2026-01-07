@@ -52,63 +52,63 @@ export default async function DashboardPage() {
   )[0]?.[0];
 
   return (
-    <div className="space-y-8 animate-slide-in">
-      <div className="space-y-1">
+    <div className="flex flex-col gap-8 animate-slide-in">
+      <div>
         <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">Dashboard</h1>
-        <p className="text-base sm:text-lg text-muted-foreground">
+        <p className="text-base sm:text-lg text-muted-foreground mt-1">
           Welcome back, {user.name || user.email}!
         </p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-3">
-        <Card className="border-2 hover:shadow-lg transition-shadow">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+      <div className="grid gap-4 sm:gap-6 md:grid-cols-3">
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
               This Month
             </CardTitle>
             <div className="p-2 bg-primary/10 rounded-lg">
-              <DollarSign className="h-5 w-5 text-primary" />
+              <DollarSign className="h-4 w-4 text-primary" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-foreground">
+            <div className="text-2xl font-bold">
               {formatCurrency(totalThisMonth)}
             </div>
-            <p className="text-sm text-muted-foreground mt-1">
+            <p className="text-xs text-muted-foreground mt-1">
               {thisMonthExpenses.length} expenses recorded
             </p>
           </CardContent>
         </Card>
 
-        <Card className="border-2 hover:shadow-lg transition-shadow">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
               Total Expenses
             </CardTitle>
             <div className="p-2 bg-blue-500/10 rounded-lg">
-              <Receipt className="h-5 w-5 text-blue-600" />
+              <Receipt className="h-4 w-4 text-blue-600" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-foreground">{totalCount}</div>
-            <p className="text-sm text-muted-foreground mt-1">All time</p>
+            <div className="text-2xl font-bold">{totalCount}</div>
+            <p className="text-xs text-muted-foreground mt-1">All time</p>
           </CardContent>
         </Card>
 
-        <Card className="border-2 hover:shadow-lg transition-shadow">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
               Top Category
             </CardTitle>
             <div className="p-2 bg-amber-500/10 rounded-lg">
-              <TrendingUp className="h-5 w-5 text-amber-600" />
+              <TrendingUp className="h-4 w-4 text-amber-600" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-foreground">
+            <div className="text-2xl font-bold">
               {mostUsedCategory || "N/A"}
             </div>
-            <p className="text-sm text-muted-foreground mt-1">
+            <p className="text-xs text-muted-foreground mt-1">
               {mostUsedCategory
                 ? `${categoryCount[mostUsedCategory]} times`
                 : "No expenses yet"}
@@ -117,40 +117,34 @@ export default async function DashboardPage() {
         </Card>
       </div>
 
-      <Card className="border-2">
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div>
-              <CardTitle className="text-2xl font-bold">Recent Expenses</CardTitle>
-              <CardDescription className="text-base mt-1">
-                Your latest 5 expenses
-              </CardDescription>
-            </div>
-            <Button asChild size="lg" className="shadow-md">
-              <Link href="/dashboard/expenses">
-                View All
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between">
+          <div>
+            <CardTitle className="text-xl font-semibold">Recent Expenses</CardTitle>
+            <CardDescription className="mt-1">
+              Your latest 5 expenses
+            </CardDescription>
           </div>
+          <Button asChild>
+            <Link href="/dashboard/expenses">
+              View All
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
         </CardHeader>
         <CardContent>
           {recentExpenses.length > 0 ? (
-            <ExpenseList
-              expenses={recentExpenses}
-              onEdit={() => {}}
-              onDelete={() => {}}
-            />
+            <ExpenseList expenses={recentExpenses} />
           ) : (
-            <div className="text-center py-16">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted mb-4">
-                <Receipt className="h-8 w-8 text-muted-foreground" />
+            <div className="text-center py-12">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-muted mb-4">
+                <Receipt className="h-6 w-6 text-muted-foreground" />
               </div>
               <h3 className="text-lg font-semibold mb-2">No expenses yet</h3>
-              <p className="text-muted-foreground mb-6">
+              <p className="text-muted-foreground text-sm mb-4">
                 Start tracking your expenses to see them here
               </p>
-              <Button asChild size="lg" className="shadow-md">
+              <Button asChild>
                 <Link href="/dashboard/expenses">Create Your First Expense</Link>
               </Button>
             </div>

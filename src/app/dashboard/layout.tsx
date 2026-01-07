@@ -14,9 +14,9 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="relative min-h-screen flex flex-col">
+    <div className="relative min-h-screen flex flex-col bg-background">
       <Navbar user={user} />
-      <main className="flex-1 container py-6">{children}</main>
+      <main className="flex-1 container py-8">{children}</main>
     </div>
   );
 }

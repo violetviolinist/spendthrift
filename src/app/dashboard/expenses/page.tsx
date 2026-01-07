@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -104,32 +105,30 @@ export default function ExpensesPage() {
   };
 
   return (
-    <div className="space-y-8 animate-slide-in">
+    <div className="flex flex-col gap-6 animate-slide-in">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div className="space-y-1">
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">Expenses</h1>
-          <p className="text-base sm:text-lg text-muted-foreground">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Expenses</h1>
+          <p className="text-muted-foreground mt-1">
             Manage your expenses and track your spending
           </p>
         </div>
-        <Button
-          onClick={() => setIsCreateDialogOpen(true)}
-          size="lg"
-          className="shadow-md w-full sm:w-auto"
-        >
-          <Plus className="mr-2 h-5 w-5" />
+        <Button onClick={() => setIsCreateDialogOpen(true)}>
+          <Plus className="mr-2 h-4 w-4" />
           New Expense
         </Button>
       </div>
 
-      <div className="bg-card border-2 rounded-xl p-6">
-        <ExpenseList
-          expenses={expenses}
-          onEdit={handleEdit}
-          onDelete={setDeleteId}
-          isLoading={isLoading}
-        />
-      </div>
+      <Card>
+        <CardContent className="pt-6">
+          <ExpenseList
+            expenses={expenses}
+            onEdit={handleEdit}
+            onDelete={setDeleteId}
+            isLoading={isLoading}
+          />
+        </CardContent>
+      </Card>
 
       <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
         <DialogContent className="max-w-2xl">

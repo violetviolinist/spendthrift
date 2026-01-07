@@ -31,12 +31,12 @@ export function Navbar({ user }: NavbarProps) {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b-2 bg-card shadow-sm">
-      <div className="container flex h-16 items-center">
-        <div className="mr-4 flex">
+    <header className="sticky top-0 z-50 w-full border-b bg-card shadow-sm">
+      <div className="container flex h-16 items-center justify-between">
+        <div className="flex items-center gap-8">
           <Link
             href="/dashboard"
-            className="mr-8 flex items-center space-x-2 group"
+            className="flex items-center gap-2 group"
           >
             <div className="p-1.5 bg-primary rounded-lg group-hover:bg-primary/90 transition-colors">
               <Wallet className="h-5 w-5 text-primary-foreground" />
@@ -45,7 +45,7 @@ export function Navbar({ user }: NavbarProps) {
               Spendthrift
             </span>
           </Link>
-          <nav className="hidden md:flex items-center space-x-1 text-sm font-medium">
+          <nav className="hidden md:flex items-center gap-1 text-sm font-medium">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -62,10 +62,8 @@ export function Navbar({ user }: NavbarProps) {
             ))}
           </nav>
         </div>
-        <div className="flex flex-1 items-center justify-end space-x-2">
-          <nav className="flex items-center">
-            <UserMenu user={user} />
-          </nav>
+        <div className="flex items-center gap-2">
+          <UserMenu user={user} />
           <Sheet>
             <SheetTrigger asChild className="md:hidden">
               <Button variant="ghost" size="icon">
@@ -77,7 +75,7 @@ export function Navbar({ user }: NavbarProps) {
               <SheetHeader>
                 <SheetTitle>Menu</SheetTitle>
               </SheetHeader>
-              <div className="flex flex-col space-y-4 mt-4">
+              <div className="flex flex-col gap-4 mt-4">
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}

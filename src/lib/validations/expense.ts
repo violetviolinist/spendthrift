@@ -7,7 +7,7 @@ export const createExpenseSchema = z.object({
     .min(1, "Description is required")
     .max(200, "Description must be at most 200 characters"),
   categoryId: z.string().optional().nullable(),
-  date: z.date(),
+  date: z.coerce.date(),
 });
 
 export const updateExpenseSchema = z.object({
@@ -18,7 +18,7 @@ export const updateExpenseSchema = z.object({
     .max(200, "Description must be at most 200 characters")
     .optional(),
   categoryId: z.string().optional().nullable(),
-  date: z.date().optional(),
+  date: z.coerce.date().optional(),
 });
 
 export type CreateExpenseInput = z.infer<typeof createExpenseSchema>;
